@@ -1,28 +1,45 @@
 console.log("LINKED!");
 
-function main(startingMoney){
-    var money = startingMoney;
+function main(){
+    var money = 0;
     var runningBus = true;
     alert("Welcome to the business where you cut grass with your teeth!")
     while(runningBus){
-        let userInput = prompt("Would you like to work today?"
-        ,"To quit enter q, else work today");
-        money = runDay(money);
+        let userInput = prompt("What would you like to do today: quit, use teeth, or buy scissors"
+        ,"To quit enter q, ");
         if(userInput.toLowerCase() === "q"){
             runningBus = false;
             alert("You end the game with $" + money);
         }else{
+            money = runDay(money,userInput);
+            console.log(money)
             alert("You have $" + money);
         }
     }
 }
 
-function runDay(currentMoney){
-    return cutWithTeeth() + currentMoney;
+function runDay(currentMoney,userInput){
+    if(userInput.toLowerCase() === "use teeth"){
+        return cutWithTeeth(currentMoney);
+    }else if(userInput.toLowerCase() === "buy scissors"){
+        if (currentMoney >= 5){
+            return buyScissors(currentMoney)
+        }else{
+            alert("You wasted your day trying to buy a scissor");
+            return currentMoney
+        }  
+    }
+    
 }
 
-function cutWithTeeth(){
-    return 1;
+function cutWithTeeth(currentMoney){
+    return currentMoney + 1;
 }
 
-main(0);
+function buyScissors(currentMoney){
+    return currentMoney - 5;
+    
+}
+
+
+main();
