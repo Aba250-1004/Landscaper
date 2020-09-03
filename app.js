@@ -6,7 +6,7 @@ function main(){
     var tools = [];
     alert("Welcome to Landscaper where you can grow your business from cutting grass with your teeth to using scissors!")
     while(runningBus){
-        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors"
+        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors, buy old-timey push lawnmower"
         ,"To quit enter q, enter desired prompt above");
         if(userInput.toLowerCase() === "q"){
             runningBus = false;
@@ -41,11 +41,12 @@ function runDay(currentMoney, userInput, tools){
         if(tools.includes("scissor")){
             return [useScissors(currentMoney),tools];
         }
+    }else if(userInput.toLowerCase() === "buy old-timey push lawnmower"){
+        return buyLawnmower(currentMoney,tools);
     }else{
         alert("invalid input, you wasted a day. Great.")
         return [currentMoney,tools];
     }
-    
 }
 
 function cutWithTeeth(currentMoney){
@@ -58,6 +59,19 @@ function buyScissors(currentMoney){
 
 function useScissors(currentMoney){
     return currentMoney + 5;
+}
+
+function buyLawnmower(currentMoney,tools){
+    if(tools.includes("old-timey push lawnmower")){
+        alert("you already own this lawnmower");
+        return [currentMoney,tools]
+    }else if(currentMoney >= 25){
+        tools.push("old-timey push lawnmower");
+        return [currentMoney-25, tools];
+    }else{
+        alert("you can't afford the old-timey push lawnmower");
+        return [currentMoney,tools];
+    }
 }
 
 
