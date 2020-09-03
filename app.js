@@ -1,33 +1,49 @@
-console.log("LINKED!");
+// console.log("LINKED!");
 
 function main(){
     var money = 0;
     var runningBus = true;
-    alert("Welcome to the business where you cut grass with your teeth!")
+    var tools = [];
+    alert("Welcome to Landscaper where you can grow your business from cutting grass with your teeth to using scissors!")
     while(runningBus){
-        let userInput = prompt("What would you like to do today: quit, use teeth, or buy scissors"
-        ,"To quit enter q, ");
+        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors"
+        ,"To quit enter q, enter desired prompt above");
         if(userInput.toLowerCase() === "q"){
             runningBus = false;
             alert("You end the game with $" + money);
         }else{
-            money = runDay(money,userInput);
-            console.log(money)
+            day = runDay(money,userInput,tools);
+            console.log(day);
+            money = day[0];
+            tools = day[1];
             alert("You have $" + money);
         }
     }
 }
 
-function runDay(currentMoney,userInput){
+function runDay(currentMoney, userInput, tools){
+    // use tools add to list if not in tools list 
     if(userInput.toLowerCase() === "use teeth"){
-        return cutWithTeeth(currentMoney);
+        return [cutWithTeeth(currentMoney),tools]
     }else if(userInput.toLowerCase() === "buy scissors"){
-        if (currentMoney >= 5){
-            return buyScissors(currentMoney)
+        if (tools.includes(("scissor"))){
+            alert("You already own scissors buddy");
+            return [currentMoney,tools]
+        }else if (currentMoney >= 5){
+            alert("You have successfully bought scissors");
+            tools.push("scissor")
+            return [buyScissors(currentMoney),tools];
         }else{
             alert("You wasted your day trying to buy a scissor");
-            return currentMoney
+            return [currentMoney,tools]
         }  
+    }else if(userInput.toLowerCase() === "use scissors"){
+        if(tools.includes("scissor")){
+            return [useScissors(currentMoney),tools];
+        }
+    }else{
+        alert("invalid input, you wasted a day. Great.")
+        return [currentMoney,tools];
     }
     
 }
@@ -38,7 +54,10 @@ function cutWithTeeth(currentMoney){
 
 function buyScissors(currentMoney){
     return currentMoney - 5;
-    
+}
+
+function useScissors(currentMoney){
+    return currentMoney + 5;
 }
 
 
