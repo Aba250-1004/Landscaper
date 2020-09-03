@@ -4,9 +4,9 @@ function main(){
     var money = 0;
     var runningBus = true;
     var tools = [];
-    alert("Welcome to Landscaper where you can grow your business from cutting grass with your teeth to using scissors!")
+    alert("Welcome to Landscaper where you can grow your business from cutting grass with your teeth to using a old-timey push lawnmower!")
     while(runningBus){
-        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors, buy old-timey push lawnmower"
+        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors, buy old-timey push lawnmower, use buy old-timey push lawnmower"
         ,"To quit enter q, enter desired prompt above");
         if(userInput.toLowerCase() === "q"){
             runningBus = false;
@@ -43,6 +43,8 @@ function runDay(currentMoney, userInput, tools){
         }
     }else if(userInput.toLowerCase() === "buy old-timey push lawnmower"){
         return buyLawnmower(currentMoney,tools);
+    }else if (userInput.toLowerCase() === "use old-timey push lawnmower"){
+        return useLawnmower(currentMoney,tools);
     }else{
         alert("invalid input, you wasted a day. Great.")
         return [currentMoney,tools];
@@ -61,6 +63,7 @@ function useScissors(currentMoney){
     return currentMoney + 5;
 }
 
+
 function buyLawnmower(currentMoney,tools){
     if(tools.includes("old-timey push lawnmower")){
         alert("you already own this lawnmower");
@@ -74,5 +77,13 @@ function buyLawnmower(currentMoney,tools){
     }
 }
 
+function useLawnmower(currentMoney,tools){
+    if (tools.includes(("old-timey push lawnmower"))){
+        return [currentMoney+25, tools]
+    }else{
+        alert("You don't know a old-timey push lawnmower")
+        return [currentMoney,tools];
+    }
+}
 
 main();
