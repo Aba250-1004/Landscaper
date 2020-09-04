@@ -17,6 +17,10 @@ function main(){
             money = day[0];
             tools = day[1];
             alert("You have $" + money);
+            if(money >= 1000){
+                runningBus = false;
+                alert("Congrats you won the game!");
+            }
         }
     }
 }
