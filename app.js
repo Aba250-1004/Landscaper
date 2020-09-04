@@ -4,9 +4,9 @@ function main(){
     var money = 0;
     var runningBus = true;
     var tools = [];
-    alert("Welcome to Landscaper where you can grow your business from cutting grass with your teeth to using a old-timey push lawnmower, buy battery-powered lawnmower, use battery-powered lawnmower, and buy a team of students!")
+    alert("Welcome to Landscaper where you can grow your business from cutting grass with your teeth to using a old-timey push lawnmower, buy battery-powered lawnmower, use battery-powered lawnmower, buy a team of students, and use a team of students!")
     while(runningBus){
-        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors, buy old-timey push lawnmower, use old-timey push lawnmower, buy battery-powered lawnmower, use battery-powered lawnmower, buy a team of students"
+        let userInput = prompt("What would you like to do today: quit, use teeth, buy scissors, use scissors, buy old-timey push lawnmower, use old-timey push lawnmower, buy battery-powered lawnmower, use battery-powered lawnmower, buy a team of students, use a team of students"
         ,"To quit enter q, enter desired prompt above");
         if(userInput.toLowerCase() === "q"){
             runningBus = false;
@@ -51,6 +51,8 @@ function runDay(currentMoney, userInput, tools){
         return useBatLawnmower(currentMoney,tools);
     }else if(userInput.toLowerCase() === "buy a team of students"){
         return buyStudents(currentMoney,tools);
+    }else if(userInput.toLowerCase() === "use a team of students"){
+        return useStudents(currentMoney,tools);
     }else{
         alert("invalid input, you wasted a day. Great.")
         return [currentMoney,tools];
@@ -123,6 +125,15 @@ function buyStudents(currentMoney,tools){
         return [currentMoney-500, tools];
     }else{
         alert("you can't afford a team of students");
+        return [currentMoney,tools];
+    }
+}
+
+function useStudents(currentMoney, tools){
+    if (tools.includes(("students"))){
+        return [currentMoney+250, tools]
+    }else{
+        alert("You don't own a team of students")
         return [currentMoney,tools];
     }
 }
